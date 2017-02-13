@@ -1,27 +1,16 @@
 import Songs from './Songs'
 import React from 'react';
 
-const Station = songs => {
-
-  const DUMMY_GENRE_NAME = 'Jazz';
-  const DUMMY_SONGS = [{
-    id: 1,
-    name: "A Love Supreme",
-    genre: "Jazz",
-    artists: [{ name: "John Coltrane" }]
-  }];
-  const DUMMY_CURRENT_SONG = {};
-  const DUMMY_IS_PLAYING = false;
-  const DUMMY_TOGGLE_ONE = function () {};
-
+const Station = ({toggleOne, genre, songs, currentSong, isPlaying}) => {
+  console.log(genre, songs, currentSong, isPlaying);
   return (
     <div>
-    <h3>{DUMMY_GENRE_NAME}</h3>
+    <h3>{genre}</h3>
     <Songs
-      songs={DUMMY_SONGS}
-      currentSong={DUMMY_CURRENT_SONG}
-      isPlaying={DUMMY_IS_PLAYING}
-      toggle={DUMMY_TOGGLE_ONE}
+      songs={songs}
+      currentSong={currentSong}
+      isPlaying={isPlaying}
+      toggleOne={toggleOne}
     />
     </div>
   )

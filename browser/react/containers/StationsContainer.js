@@ -11,9 +11,10 @@ const groupByGenre = songs => {
   return stations;
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    stations: groupByGenre(state.songs)
+    stations: groupByGenre(state.songs),
+    children: ownProps.children,
   };
 }
 
