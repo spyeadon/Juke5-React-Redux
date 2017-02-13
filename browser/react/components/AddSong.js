@@ -2,7 +2,6 @@ import React from 'react';
 import Songs from './Songs';
 
 export default function (props) {
-
   const songs = props.songs;
   const error = props.error;
   const handleChange = props.handleChange;
