@@ -13,7 +13,7 @@ export default function (props) {
           albums && albums.map(album => (
             <div className="col-xs-4" key={ album.id }>
               <Link className="thumbnail" to={`/albums/${album.id}`}>
-                <img src={ album.imageUrl }/>
+                <img src={ album.imageUrl } />
                 <div className="caption">
                   <h5>
                     <span>{ album.name }</span>
@@ -27,4 +27,4 @@ export default function (props) {
       </div>
     </div>
   );
-};
+}

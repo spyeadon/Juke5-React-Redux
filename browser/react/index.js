@@ -9,16 +9,20 @@ import FilterableArtistsContainer from './containers/FilterableArtistsContainer'
 import NewPlaylistContainer from './containers/NewPlaylistContainer';
 import PlaylistContainer from './containers/PlaylistContainer';
 import LyricsContainer from './containers/LyricsContainer';
+import StationsContainer from './containers/StationsContainer.js';
+//import StationContainer from './containers/StationContainer.js';
 
 import App from './components/App';
 import Albums from './components/Albums';
 import Songs from './components/Songs';
+import Station from './components/Station';
 
 import axios from 'axios';
 import store from './store';
 import {receiveAlbums, getAlbumById} from './action-creators/albums';
 import {receiveArtists, getArtistById} from './action-creators/artists';
-import {receivePlaylists, getPlaylistById} from './action-creators/playlists';
+import {receivePlaylists, getPlaylistById, loadAllSongs} from './action-creators/playlists';
+import { Provider } from 'react-redux';
 
 const onAppEnter = function () {
 
@@ -48,10 +52,16 @@ const onPlaylistEnter = function (nextRouterState) {
   const playlistId = nextRouterState.params.playlistId;
   store.dispatch(getPlaylistById(playlistId));
 };
+const onStationsEnter = function () {
+  store.dispatch(loadAllSongs());
+};
 
 ReactDOM.render(
+  <Provider store={store}>
   <Router history={hashHistory}>
     <Route path="/" component={App} onEnter={onAppEnter}>
+      <Route path='/stations' component={StationsContainer} onEnter={onStationsEnter}/>
+      <Route path='/stations/:genre' component={Station} />
       <Route path="/albums" component={AlbumsContainer}/>
       <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
       <Route path="/artists" component={FilterableArtistsContainer}/>
@@ -64,6 +74,7 @@ ReactDOM.render(
       <Route path="/lyrics" component={LyricsContainer} />
       <IndexRedirect to="/albums"/>
     </Route>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('app')
 );
